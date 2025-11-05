@@ -17,7 +17,7 @@ public class LexemeParser extends AbstractTextParser {
         String[] parts = text.split(RegexConstants.LEXEME_REGEX);
 
         for (String part : parts) {
-            if (part.isEmpty()) continue;
+            if (part.isBlank()) continue;
             TextComponent lexemeComponent = nextParser.parse(part.trim());
             sentence.add(lexemeComponent);
         }
@@ -26,3 +26,4 @@ public class LexemeParser extends AbstractTextParser {
         return sentence;
     }
 }
+
