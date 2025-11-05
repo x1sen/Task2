@@ -19,7 +19,7 @@ public class ParagraphParser extends AbstractTextParser {
 
         while (matcher.find()) {
             String paragraphText = matcher.group().trim();
-            if (!paragraphText.isEmpty()) {
+            if (!paragraphText.isBlank()) {
                 TextComposite paragraph = new TextComposite(ComponentType.PARAGRAPH);
                 TextComponent sentenceComponent = nextParser.parse(paragraphText);
                 for (TextComponent sentence : sentenceComponent.getChildren()) {
@@ -33,3 +33,4 @@ public class ParagraphParser extends AbstractTextParser {
         return textComposite;
     }
 }
+
