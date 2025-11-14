@@ -1,11 +1,12 @@
 package service;
 
-import com.example.entity.TextComponent;
-import com.example.exception.TextException;
-import com.example.parser.ParagraphParser;
-import com.example.reader.TextReader;
-import com.example.service.TextService;
-import com.example.service.TextServiceImpl;
+import com.example.text_task.entity.TextComponent;
+import com.example.text_task.exception.TextException;
+import com.example.text_task.parser.*;
+import com.example.text_task.reader.TextReader;
+import com.example.text_task.entity.ComponentType;
+import com.example.text_task.service.TextService;
+import com.example.text_task.service.impl.TextServiceImpl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,12 +24,12 @@ class TextServiceImplTest {
         TextReader reader = new TextReader();
         String content = reader.readFile("src/main/resources/input.txt");
 
-        // ВАЖНО: создаём ВСЮ цепочку парсеров!
+
         var parser = new ParagraphParser();
-        var sentenceParser = new com.example.parser.SentenceParser();
-        var lexemeParser   = new com.example.parser.LexemeParser();
-        var wordParser     = new com.example.parser.WordParser();
-        var punctParser    = new com.example.parser.PunctuationParser();
+        var sentenceParser = new SentenceParser();
+        var lexemeParser   = new LexemeParser();
+        var wordParser     = new WordParser();
+        var punctParser    = new PunctuationParser();
 
         wordParser.setNext(punctParser);
         lexemeParser.setNext(wordParser);
@@ -58,8 +59,8 @@ class TextServiceImplTest {
     void swapFirstAndLastLexemeInSentences() throws TextException {
         TextComponent result = service.swapFirstAndLastLexemeInSentences(text);
 
-        // ComponentType берём напрямую из enum-класса
-        var TEXT = com.example.entity.ComponentType.TEXT;
+
+        var TEXT = ComponentType.TEXT;
         assertEquals(TEXT, result.getType());
     }
 
